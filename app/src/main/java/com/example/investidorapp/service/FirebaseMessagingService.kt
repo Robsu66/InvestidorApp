@@ -1,38 +1,30 @@
-package com.example.investidorapp.services
+package com.example.investidorapp.service
 
-import android.Manifest
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import br.ufc.quixada.investioraula.MainActivity
-import com.example.investidorapp.R
-import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-
 class FirebaseMessagingService: FirebaseMessagingService() {
+    // Metodo chamado quando o dispositivo recebe uma mensagem do Firebase
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
+        // Exibe a notificação somente se a mensagem tiver titulo e corpo
         remoteMessage.notification?.let {
             showNotification(it.title, it.body)
         }
     }
 
+    // Método chamado quando um novo token é gerado para o dispositivo
     override fun onNewToken(token: String) {
         super.onNewToken(token)
+        // Aqui você pode enviar o token para o backend, se necessário
         println("Token do dispositivo: $token")
     }
 
+    // Exibe a notificação no dispositivo
     private fun showNotification(title: String?, message: String?) {
         val channelId = "investidor notifications"
         val notificationId = (System.currentTimeMillis() % 10000).toInt()
 
+        // Criação do canal de notificação (necessário no Android 8.0+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,

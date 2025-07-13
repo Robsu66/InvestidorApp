@@ -56,15 +56,13 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3.android)
+    implementation("com.google.firebase:firebase-messaging-ktx:24.1.2")
     debugImplementation(libs.androidx.ui.tooling)
 
     implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
-
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.0")
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
 }

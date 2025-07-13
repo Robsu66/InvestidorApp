@@ -1,31 +1,47 @@
-package br.ufc.quixada.investioraula
+package com.example.investidorapp
 
-import android.Manifest
-import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.core.app.ActivityCompat
-import androidx.lifecycle.viewmodel.compose.viewModel
-import br.ufc.quixada.investioraula.view.InvestidorScreen
-import br.ufc.quixada.investioraula.viewmodel.InvestimentosViewModel
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.investidorapp.ui.theme.InvestidorAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-                101
-            )
-        }
+        enableEdgeToEdge()
         setContent {
             InvestidorAppTheme {
-                val viewModel: InvestimentosViewModel = viewModel()
-                InvestidorScreen(viewModel)
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Greeting(
+                        name = "Android",
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
             }
         }
+    }
+}
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    InvestidorAppTheme {
+        Greeting("Android")
     }
 }
